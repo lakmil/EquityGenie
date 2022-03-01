@@ -115,6 +115,10 @@ a.redirect-link-tag {
   margin: 0;
 }
 
+.profile-page {
+  margin-top: 3%;
+}
+
 /* media queries */
 @media only screen and (max-width: 1200px){
   /*Tablets [601px -> 1200px]*/

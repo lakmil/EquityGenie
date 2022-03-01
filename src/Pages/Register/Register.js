@@ -21,7 +21,7 @@ const Register = () => {
 
     useEffect(() => {
         if(redirect || localStorage.getItem('access_token')) {
-            return navigate('/profile')
+            return navigate("/login")
         }
     }, [redirect,navigate])
 
@@ -41,7 +41,6 @@ const Register = () => {
 
         axios.post('/system/register',data)
         .then(res => {
-            console.log(res)
             setRedirect(true)
         })
         .catch(err => console.log("Entered:  "+err.response.data.detail))
