@@ -1,9 +1,9 @@
 const SideBar = () => {
     return(
-        <div class=" sidebar-equity-genie col-xl-4">
-            <div class="card mb-4 mb-xl-0">
-                <div class="card-header">Navigation</div>
-                <div class="card-body text-center">
+        <div className=" sidebar-equity-genie col-xl-4">
+            <div className="card mb-4 mb-xl-0">
+                <div className="card-header">Navigation</div>
+                <div className="card-body text-center">
                     Content
                 </div>
             </div>
