@@ -5,7 +5,6 @@ import Button from '../../Components/Button/Button';
 import Input from '../../Components/FormElements/Input';
 import Header from '../../Components/Header/Header';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
@@ -14,13 +13,11 @@ const Login = () => {
     const [password, setPassword] = useState(null);
     const [redirect, setRedirect] = useState(false);
 
-    let navigate = useNavigate();
-
     useEffect(() => {
         if(redirect || localStorage.getItem('access_token')) {
-            return navigate('/profile')
+            return window.location.href = "/profile"
         }
-    }, [redirect,navigate])
+    }, [redirect])
 
     //handle the login submit
     function handleSubmit(e)  {
@@ -64,14 +61,6 @@ const Login = () => {
                         <div className='redirect-links'>
                             <Link className='redirect-link-tag' to="/register">Create Account?</Link>
                             <Link className='redirect-link-tag' to="/forgot-password">Forgot Password?</Link>
-                        </div>
-                        <div className='other-options'>
-                            <div className="divider d-flex align-items-center my-4">
-                                <p className="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-                            </div>
-                            <a className="btn btn-primary btn-lg btn-block" href="#!" role="button">
-                                <i className="fab fa-google-f me-2"></i>Continue with Google
-                            </a>
                         </div>
                     </div>
                 </div>
