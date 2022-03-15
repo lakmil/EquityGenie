@@ -1,14 +1,31 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 var KiteConnect = require('kiteconnect').KiteConnect
 
 const DashBoard = () => {
 
+    const [initialState, setInitialState] = useState({})
+
+    useEffect(() => {
+        getBrokerDetails()
+    }, [])
+
+    async function getBrokerDetails() {
+        axios.get('/user/broker-info')
+        .then(res => {
+            setInitialState(res.data)
+            localStorage.setItem("brokerData", JSON.stringify(res.data))
+        })
+        .catch(err => console.log("Broker Info not found: " + err))
+    } 
+
     function handleButton() {
-        console.log("Entered")
+        console.log(initialState.appKey)
         var kc = new KiteConnect({
-            api_key: "d6dhumvfvecb3f7h"
+            api_key: initialState.appKey
         });
         const login_url = kc.getLoginURL()
-        console.log(login_url)
         window.location.href = login_url;          
     }
 
