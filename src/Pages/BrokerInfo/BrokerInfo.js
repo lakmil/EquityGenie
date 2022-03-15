@@ -69,11 +69,13 @@ const BrokerInfo = () => {
             "appSecret": appSecret,
             "requestToken": null
         }
-        axios.post('/user/broker-info',data)
+        axios.put('/user/broker-info',data)
         .then(res => {
             console.log("Broker Info Saved")
         })
-        .catch(err => console.log("Broker Info not saved:  "+err.response.data.detail))
+        .catch(err =>  {
+            console.log("Broker Info not saved:  "+err.response.data.detail)
+        })
     }
 
     return(
