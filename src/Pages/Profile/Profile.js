@@ -11,9 +11,6 @@ const Profile = () => {
     const [userData, setUserData] = useState(null)
 
     useEffect(() => {
-        // setTimeout(() => {
-            
-        // }, 3000);
         if(!userData)
             getData()
     }, [userData])

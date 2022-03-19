@@ -30,7 +30,6 @@ const Login = () => {
             }
         })
         .then(res => {
-            console.log(res)
             setRedirect(true)
             localStorage.setItem("access_token", res.data.accessToken)
         })
