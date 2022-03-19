@@ -31,8 +31,9 @@ const DashBoard = () => {
 
     return(
         <div className="equity-genie-dashboard container ">
-            <h1>Dashboard</h1>
-            <button className="btn btn-primary" onClick={handleButton} type="button">Login to your Broker</button>
+            <div className='zerodha-login-button'>
+                <button className="btn btn-primary" onClick={handleButton} type="button">Login to your Broker</button>
+            </div>
         </div>
     );
 }
