@@ -35,8 +35,6 @@ const Profile = () => {
             fname: name
         }));
     }
-
-    
     
     return(
         <div className="profile-page-equity-genie user-info container">
