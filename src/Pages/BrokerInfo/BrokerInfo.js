@@ -2,6 +2,7 @@ import SideBar from "../../Components/SideBar/SideBar";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loader from "../../Components/Loader/Loader";
 
 const BrokerInfo = () => {
 
@@ -80,7 +81,7 @@ const BrokerInfo = () => {
 
     return(
         <div className="broker-info-equity-genie user-info container">
-            {!userData ? <p>Loader...</p> : 
+            {!userData ? <Loader /> : 
             <div className="row">
                 <SideBar />
                 <div className="col-xl-8">

@@ -39,7 +39,12 @@ const Register = () => {
             "userType":"NORMAL"
         }
 
-        axios.post('/system/register',data)
+        axios.post('/system/register', {
+            auth: {
+                username: "frontend@equitygenie.in",
+                password: "WLXsviU6imQez25pnU"
+            }
+        },data)
         .then(res => {
             setRedirect(true)
         })

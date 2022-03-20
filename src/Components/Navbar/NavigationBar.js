@@ -7,7 +7,16 @@ import {
 } from 'react-bootstrap';
 
 const NavigationBar = () => {
+
+    // const [userData, setUserData] = useState(null);
     
+    // useEffect(() => {
+    //     if(localStorage.getItem('userData')) {
+    //         userName = JSON.parse(localStorage.getItem('userData')).fName +' '+ JSON.parse(localStorage.getItem('userData')).lName
+    //         setUserData(JSON.parse(localStorage.getItem('userData')))
+    //     }
+    // }, [userData])
+
     function handleLogout() {
         axios.delete('/user/logout')
         .then(res => {
@@ -30,7 +39,7 @@ const NavigationBar = () => {
         }
         rightLinks = (
             <Nav>
-                <NavDropdown title={userName} id="basic-nav-dropdown">
+                <NavDropdown title={userName !== "" ? userName : "Hello"} id="basic-nav-dropdown">
                     <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
                     <NavDropdown.Item href="/broker-info">Broker Info</NavDropdown.Item>
                     <NavDropdown.Divider />

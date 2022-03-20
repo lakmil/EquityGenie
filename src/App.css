@@ -102,6 +102,12 @@ a.redirect-link-tag {
   margin-top: 3%;
 }
 
+.category-item {
+  background-color: #152C49 !important;
+  color: azure !important;
+  cursor: pointer !important;
+}
+
 /* media queries */
 @media only screen and (max-width: 1200px){
   /*Tablets [601px -> 1200px]*/
