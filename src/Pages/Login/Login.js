@@ -38,11 +38,11 @@ const Login = () => {
             })
             .then(res => {
                 localStorage.setItem("userData", JSON.stringify(res.data))
+                setRedirect(true)
             })
             .catch(err => {
                 localStorage.clear();
             })
-            setRedirect(true)
         })
         .catch(err => console.log(err));
     }
