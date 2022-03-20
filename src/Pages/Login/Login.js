@@ -30,8 +30,19 @@ const Login = () => {
             }
         })
         .then(res => {
-            setRedirect(true)
             localStorage.setItem("access_token", res.data.accessToken)
+            axios.get('/user', {
+                headers: {
+                    'Authorization': 'Bearer ' + res.data.accessToken
+                }
+            })
+            .then(res => {
+                localStorage.setItem("userData", JSON.stringify(res.data))
+            })
+            .catch(err => {
+                localStorage.clear();
+            })
+            setRedirect(true)
         })
         .catch(err => console.log(err));
     }

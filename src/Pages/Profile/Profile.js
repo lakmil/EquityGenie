@@ -2,6 +2,7 @@ import axios from 'axios';
 import React , {useState, useEffect} from 'react'
 import SideBar from '../../Components/SideBar/SideBar';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../../Components/Loader/Loader';
 
 
 const Profile = () => {
@@ -19,7 +20,6 @@ const Profile = () => {
         axios.get('/user')
         .then(res => {
             setUserData(res.data);
-            localStorage.setItem("userData", JSON.stringify(res.data))
         })
         .catch(err => console.log(err));
     }
@@ -40,7 +40,7 @@ const Profile = () => {
     
     return(
         <div className="profile-page-equity-genie user-info container">
-            {!userData ? <p>Loader...</p> : 
+            {!userData ? <Loader /> : 
             <div>
                 <div className="row">
                     <SideBar />

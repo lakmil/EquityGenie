@@ -1,4 +1,6 @@
+// import axios from 'axios';
 import { Routes, Route } from 'react-router-dom';
+// import AuthVerify from '../Auth/AuthVerify';
 import BrokerInfo from '../Pages/BrokerInfo/BrokerInfo';
 import BrokerRedirect from '../Pages/BrokerRedirect/BrokerRedirect';
 import DashBoard from '../Pages/DashBoard/DashBoard';
@@ -9,6 +11,17 @@ import Profile from '../Pages/Profile/Profile';
 import Register from '../Pages/Register/Register';
 
 const RouteFile = () => {
+
+    // function logOut() {
+    //     // AuthService.logout();
+    //     axios.delete('/user/logout')
+    //     .then(res => {
+    //         console.log("Logged Out")
+    //     })
+    //     .catch(err => console.log(err));
+    //     localStorage.clear();
+    // }
+
     return(
         <>
             <Routes>
@@ -21,6 +34,7 @@ const RouteFile = () => {
                 <Route exact path='/redirect/broker-info' element={<BrokerRedirect />} />
                 <Route exact path='/' element={<HomePage />} />
             </Routes>
+            {/* <AuthVerify logOut={logOut}/> */}
         </>
     );
 }
