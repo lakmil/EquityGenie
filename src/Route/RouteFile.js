@@ -1,4 +1,5 @@
 // import axios from 'axios';
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 // import AuthVerify from '../Auth/AuthVerify';
 import BrokerInfo from '../Pages/BrokerInfo/BrokerInfo';
@@ -21,6 +22,12 @@ const RouteFile = () => {
     //     .catch(err => console.log(err));
     //     localStorage.clear();
     // }
+
+    useEffect(() => {
+        if(!localStorage.getItem('access_token')) {
+            // window.location.href = "/login"
+        }
+    }, [])
 
     return(
         <>

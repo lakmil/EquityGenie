@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"
 
 const BrokerRedirect = () => {
 
@@ -26,8 +25,9 @@ const BrokerRedirect = () => {
                 .then(res => {
                     console.log("Broker Info Updated")
                     localStorage.setItem("request_token", request_token)
+                    window.location.href = "/"
                 })
-            .catch(err => console.log("Error: "+err));
+                .catch(err => console.log("Error: "+err));
             }
             updateBrokerDetails()
         }
@@ -39,7 +39,6 @@ const BrokerRedirect = () => {
     return(
         <div className="equity-genie-broker-redirect container">
             <h1>You Have been logged in!</h1>
-            <Link to="/dashboard">Go Back to Dashboard</Link>
         </div>
     )
 }
