@@ -1,12 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const BrokerRedirect = () => {
 
-    const [initialState, setInitialState] = useState('')
+    // const [initialState, setInitialState] = useState('')
 
     useEffect(() => {
-        setInitialState(JSON.parse(localStorage.getItem('brokerData')))
+        // setInitialState(JSON.parse(localStorage.getItem('brokerData')))
+        const initialState = JSON.parse(localStorage.getItem('brokerData'));
         const request_token = searchParams("request_token");
         const action = searchParams("action")
         const status = searchParams("status")
@@ -31,7 +32,7 @@ const BrokerRedirect = () => {
             }
             updateBrokerDetails()
         }
-    }, [initialState])
+    }, [])
 
     function searchParams(param) {
         return new URLSearchParams(window.location.search).get(param)
