@@ -6,25 +6,17 @@ const Strategies = (props) => {
 
 
     useEffect(() => {
-        // axios.get('/system/strategy/template?name=NineTwentyStrategy', {
-        //     auth: {
-        //         username: "frontend@equitygenie.in",
-        //         password: "WLXsviU6imQez25pnU"
-        //     }
-        // })
-        // .then(res => {
-        //     console.log(res.data)
-        //     // setStrategies(res.data.categories)
-        // })
-        // .catch(err => console.log("Error"))
+        
     }, [])
 
+    
+
     return(
-        <div className="equity-genie-strategies">
+        <div className="equity-genie-strategies-list">
             <ListGroup>
                 {props.strategies && props.category ? props.strategies.filter(item => item.category === props.category)
                 .map((item, index) => {
-                    return <ListGroup.Item key={index}>{item.name}</ListGroup.Item>
+                    return <ListGroup.Item onClick={() => props.updateName(item.name)} key={index}>{item.name}</ListGroup.Item>
                 }) : <Loader />
                 }
             </ListGroup>
