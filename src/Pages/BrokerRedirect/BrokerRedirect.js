@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
+import Loader from "../../Components/Loader/Loader";
 
 const BrokerRedirect = () => {
 
@@ -39,7 +40,7 @@ const BrokerRedirect = () => {
     }
     return(
         <div className="equity-genie-broker-redirect container">
-            <h1>You Have been logged in!</h1>
+            <Loader />
         </div>
     )
 }

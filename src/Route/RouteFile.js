@@ -1,7 +1,5 @@
-// import axios from 'axios';
-import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-// import AuthVerify from '../Auth/AuthVerify';
+import NavigationBar from '../Components/Navbar/NavigationBar';
 import BrokerInfo from '../Pages/BrokerInfo/BrokerInfo';
 import BrokerRedirect from '../Pages/BrokerRedirect/BrokerRedirect';
 import DashBoard from '../Pages/DashBoard/DashBoard';
@@ -13,24 +11,13 @@ import Register from '../Pages/Register/Register';
 
 const RouteFile = () => {
 
-    // function logOut() {
-    //     // AuthService.logout();
-    //     axios.delete('/user/logout')
-    //     .then(res => {
-    //         console.log("Logged Out")
-    //     })
-    //     .catch(err => console.log(err));
-    //     localStorage.clear();
-    // }
-
-    useEffect(() => {
-        if(!localStorage.getItem('access_token')) {
-            // window.location.href = "/login"
-        }
-    }, [])
+    if(!localStorage.getItem('access_token') && !window.location.href.includes('login')) {
+        window.location.href = "/login"
+    }
 
     return(
         <>
+            {localStorage.getItem('access_token') ? <NavigationBar /> : null}
             <Routes>
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/register' element={<Register />} />
@@ -41,7 +28,6 @@ const RouteFile = () => {
                 <Route exact path='/redirect/broker-info' element={<BrokerRedirect />} />
                 <Route exact path='/' element={<HomePage />} />
             </Routes>
-            {/* <AuthVerify logOut={logOut}/> */}
         </>
     );
 }
