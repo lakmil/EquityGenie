@@ -1,7 +1,6 @@
-// import axios from 'axios';
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-// import AuthVerify from '../Auth/AuthVerify';
+import NavigationBar from '../Components/Navbar/NavigationBar';
 import BrokerInfo from '../Pages/BrokerInfo/BrokerInfo';
 import BrokerRedirect from '../Pages/BrokerRedirect/BrokerRedirect';
 import DashBoard from '../Pages/DashBoard/DashBoard';
@@ -10,27 +9,26 @@ import HomePage from '../Pages/HomePage/HomePage';
 import Login from '../Pages/Login/Login';
 import Profile from '../Pages/Profile/Profile';
 import Register from '../Pages/Register/Register';
+import jwt_decode from "jwt-decode";
 
 const RouteFile = () => {
 
-    // function logOut() {
-    //     // AuthService.logout();
-    //     axios.delete('/user/logout')
-    //     .then(res => {
-    //         console.log("Logged Out")
-    //     })
-    //     .catch(err => console.log(err));
-    //     localStorage.clear();
-    // }
-
     useEffect(() => {
-        if(!localStorage.getItem('access_token')) {
-            // window.location.href = "/login"
+        const accessToken = localStorage.getItem("access_token") ? localStorage.getItem("access_token") : "" ;
+        const expirationTime = jwt_decode(accessToken).exp ? jwt_decode(accessToken).exp : "" ;
+        if(!localStorage.getItem('access_token') && !window.location.href.includes('login')) {
+            window.location.href = "/login"
+        }
+        else if(expirationTime < Date.now() / 1000 && !window.location.href.includes('login')) {
+            localStorage.clear();
+            window.location.href = "/login"
         }
     }, [])
 
+
     return(
         <>
+            {localStorage.getItem('access_token') ? <NavigationBar /> : null}
             <Routes>
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/register' element={<Register />} />
@@ -41,7 +39,6 @@ const RouteFile = () => {
                 <Route exact path='/redirect/broker-info' element={<BrokerRedirect />} />
                 <Route exact path='/' element={<HomePage />} />
             </Routes>
-            {/* <AuthVerify logOut={logOut}/> */}
         </>
     );
 }
