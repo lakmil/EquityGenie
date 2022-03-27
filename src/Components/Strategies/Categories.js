@@ -4,7 +4,7 @@ import { ListGroup } from "react-bootstrap";
 import Loader from "../Loader/Loader";
 import Strategies from "./Strategies";
 
-const Categories = () => {
+const Categories = (props) => {
 
     const [categories, setCategories] = useState(null);
     const [strategies, setStrategies] = useState(null);
@@ -17,7 +17,6 @@ const Categories = () => {
             }
         })
         .then(res => {
-            console.log(res.data)
             setCategories(res.data.categories)
             setStrategies(res.data.strategies)
         })
@@ -30,7 +29,7 @@ const Categories = () => {
                 {categories ? categories.map((item,index) => {
                     return <div key={index} className="list">
                         <ListGroup.Item className="category-item">{item}</ListGroup.Item>
-                        <Strategies category = {item} strategies = {strategies} />
+                        <Strategies updateName={props.updateName} category = {item} strategies = {strategies} />
                         </div>
                 }) : <Loader />}      
             </ListGroup>

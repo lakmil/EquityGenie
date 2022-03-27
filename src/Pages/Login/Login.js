@@ -15,7 +15,7 @@ const Login = () => {
 
     useEffect(() => {
         if(redirect || localStorage.getItem('access_token')) {
-            return window.location.href = "/profile"
+            return window.location.href = "/"
         }
     }, [redirect])
 

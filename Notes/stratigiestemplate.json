@@ -1,0 +1,73 @@
+{
+  "label": "Strategy Name",
+  "fields": [
+    {
+      "id": "enabled",
+      "label": "Enabled",
+      "mandatory": "yes",
+      "tag": "",
+      "type": "checkbox",
+	  "default":"",
+	  
+      "value": null
+    },
+    {
+      "id": "access_level",
+      "label": "Access Level",
+      "mandatory": "yes",
+      "tag": "",
+      "type": "text",
+      "value": "NORMAL"
+    },
+    {
+      "id": "max_trade_per_day",
+      "label": "Max Trade Per Day",
+      "mandatory": "yes",
+      "tag": "",
+      "type": "number",
+      "value": 12
+    },
+    {
+      "id": "strategy_capital",
+      "label": "Strategy Capital",
+      "mandatory": "yes",
+      "tag": "",
+      "type": "number",
+      "value": 10000
+    },
+    {
+      "id": "filter_criteria_ceil_perc",
+      "label": "Filter Criteria",
+      "mandatory": "yes",
+      "tag": "",
+      "type": "number",
+      "value": 2
+    },
+    {
+      "id": "filter_criteria_ceil_perc",
+      "label": "Filter Criteria",
+      "mandatory": "yes",
+      "tag": "",
+      "type": "number",
+      "value": 2
+    }
+    //options example
+    {
+      "id": "options",
+      "label": "Options",
+      "mandatory": "yes",
+      "tag": "",
+      "type": "select",
+      "options": [
+        {
+          "option_1": "Option 1"
+        },
+        {
+          "option_2": "Option 2"
+        }
+      ]
+    }
+  ]
+}
+
+int, float, string, bool, time, list, multiSelectList,  metaData
