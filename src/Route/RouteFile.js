@@ -14,15 +14,15 @@ import jwt_decode from "jwt-decode";
 const RouteFile = () => {
 
     useEffect(() => {
-        const accessToken = localStorage.getItem("access_token") ? localStorage.getItem("access_token") : "" ;
-        const expirationTime = jwt_decode(accessToken).exp ? jwt_decode(accessToken).exp : "" ;
         if(!localStorage.getItem('access_token') && !window.location.href.includes('login')) {
             window.location.href = "/login"
         }
-        else if(expirationTime < Date.now() / 1000 && !window.location.href.includes('login')) {
-            localStorage.clear();
-            window.location.href = "/login"
-        }
+        // const accessToken = localStorage.getItem("access_token") ? localStorage.getItem("access_token") : "" ;
+        // const expirationTime = jwt_decode(accessToken).exp ? jwt_decode(accessToken).exp : "" ;
+        // if(expirationTime < Date.now() / 1000 && !window.location.href.includes('login')) {
+        //     localStorage.clear();
+        //     window.location.href = "/login"
+        // }
     }, [])
 
 
