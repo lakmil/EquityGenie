@@ -1,13 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"
+import { useEffect } from "react";
 
 const BrokerRedirect = () => {
 
-    const [initialState, setInitialState] = useState('')
+    // const [initialState, setInitialState] = useState('')
 
     useEffect(() => {
-        setInitialState(JSON.parse(localStorage.getItem('brokerData')))
+        // setInitialState(JSON.parse(localStorage.getItem('brokerData')))
+        const initialState = JSON.parse(localStorage.getItem('brokerData'));
         const request_token = searchParams("request_token");
         const action = searchParams("action")
         const status = searchParams("status")
@@ -26,12 +26,13 @@ const BrokerRedirect = () => {
                 .then(res => {
                     console.log("Broker Info Updated")
                     localStorage.setItem("request_token", request_token)
+                    window.location.href = "/"
                 })
-            .catch(err => console.log("Error: "+err));
+                .catch(err => console.log("Error: "+err));
             }
             updateBrokerDetails()
         }
-    }, [initialState])
+    }, [])
 
     function searchParams(param) {
         return new URLSearchParams(window.location.search).get(param)
@@ -39,7 +40,6 @@ const BrokerRedirect = () => {
     return(
         <div className="equity-genie-broker-redirect container">
             <h1>You Have been logged in!</h1>
-            <Link to="/dashboard">Go Back to Dashboard</Link>
         </div>
     )
 }

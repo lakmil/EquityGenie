@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import {
     Navbar,
     Nav,
@@ -6,7 +7,33 @@ import {
     NavDropdown
 } from 'react-bootstrap';
 
+var KiteConnect = require('kiteconnect').KiteConnect
+
+
 const NavigationBar = () => {
+
+    const [initialState, setInitialState] = useState({})
+    const [color, setColor] = useState('btn btn-danger')
+    const [toggle, setToggle] = useState(false)
+    const [brokerLogin, setBrokerLogin] = useState('Broker Login')
+
+    useEffect(() => {
+        getBrokerDetails()
+        if(localStorage.getItem('request_token')) {
+            setColor('btn btn-success')
+            setToggle(true)
+            setBrokerLogin('Logged In')
+        }
+    }, [])
+
+    async function getBrokerDetails() {
+        axios.get('/user/broker-info')
+        .then(res => {
+            setInitialState(res.data)
+            localStorage.setItem("brokerData", JSON.stringify(res.data))
+        })
+        .catch(err => console.log("Broker Info not found: " + err))
+    }
 
     // const [userData, setUserData] = useState(null);
     
@@ -48,6 +75,16 @@ const NavigationBar = () => {
             </Nav>
         )
     }
+
+    function handleButton() {
+        console.log(initialState.appKey)
+        var kc = new KiteConnect({
+            api_key: initialState.appKey
+        });
+        const login_url = kc.getLoginURL()
+        window.location.href = login_url;          
+    }
+
     return (
         <div className="navbar-equity-genie">
             <Navbar sticky="top" bg="light" expand="lg">
@@ -56,9 +93,7 @@ const NavigationBar = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/dashboard">DashBoard</Nav.Link>
-                        
+                        <button className= {color} disabled = {toggle} onClick={handleButton} type="button">{brokerLogin}</button>
                     </Nav>
                     {rightLinks}
                     </Navbar.Collapse>

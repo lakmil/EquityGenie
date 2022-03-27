@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React , {useState, useEffect} from 'react'
-import SideBar from '../../Components/SideBar/SideBar';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../Components/Loader/Loader';
 
@@ -41,7 +40,6 @@ const Profile = () => {
             {!userData ? <Loader /> : 
             <div>
                 <div className="row">
-                    <SideBar />
                     <div className="col-xl-8">
                     <div className="card mb-4">
                     <div className="card-header">Profile Details</div>

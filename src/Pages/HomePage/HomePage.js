@@ -1,7 +1,11 @@
+import SideBar from "../../Components/SideBar/SideBar";
+
 const HomePage = () => {
     return (
-        <div className="home-page-equity-genie">
-            <h1>HOME page</h1>
+        <div className="home-page-equity-genie container">
+            <div className="row">
+                <SideBar />
+            </div>
         </div>
     )
 }

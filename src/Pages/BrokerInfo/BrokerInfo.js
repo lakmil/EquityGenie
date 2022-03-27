@@ -1,4 +1,3 @@
-import SideBar from "../../Components/SideBar/SideBar";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -9,9 +8,10 @@ const BrokerInfo = () => {
     let navigate = useNavigate();
 
     const [userData, setUserData] = useState(null);
-    const [clientID, setClientID] = useState('');
-    const [appKey, setAppKey] = useState('');
-    const [appSecret, setAppSecret] = useState('');
+    const [clientID, setClientID] = useState(null);
+    const [appKey, setAppKey] = useState(null);
+    const [appSecret, setAppSecret] = useState(null);
+    const [post, setPost] = useState(false)
 
     useEffect(() => {
         async function getBrokerDetails() {
@@ -20,7 +20,10 @@ const BrokerInfo = () => {
                 setInitialState(res)
                 localStorage.setItem("brokerData", JSON.stringify(res.data))
             })
-            .catch(err => console.log("Broker Info not found: " + err))
+            .catch(err => {
+                console.log("Broker Info not found: " + err)
+                setPost(true)
+            })
         } 
 
         async function getUserDetails() {
@@ -70,20 +73,30 @@ const BrokerInfo = () => {
             "appSecret": appSecret,
             "requestToken": null
         }
-        axios.put('/user/broker-info',data)
-        .then(res => {
-            console.log("Broker Info Saved")
-        })
-        .catch(err =>  {
-            console.log("Broker Info not saved:  "+err.response.data.detail)
-        })
+        if(post) {
+            axios.post('/user/broker-info',data)
+            .then(res => {
+                console.log("Broker Info Posted")
+            })
+            .catch(err =>  {
+                console.log("Broker Info not posted:  "+err.response.data.detail)
+            })
+        }
+        else {
+            axios.put('/user/broker-info',data)
+            .then(res => {
+                console.log("Broker Info pdated")
+            })
+            .catch(err =>  {
+                console.log("Broker Info not updated:  "+err.response.data.detail)
+            })
+        }
     }
 
     return(
         <div className="broker-info-equity-genie user-info container">
             {!userData ? <Loader /> : 
             <div className="row">
-                <SideBar />
                 <div className="col-xl-8">
                     <div className="card mb-4">
                         <div className="card-header">
