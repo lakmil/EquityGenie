@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavigationBar from '../Components/Navbar/NavigationBar';
 import BrokerInfo from '../Pages/BrokerInfo/BrokerInfo';
@@ -8,12 +9,22 @@ import HomePage from '../Pages/HomePage/HomePage';
 import Login from '../Pages/Login/Login';
 import Profile from '../Pages/Profile/Profile';
 import Register from '../Pages/Register/Register';
+import jwt_decode from "jwt-decode";
 
 const RouteFile = () => {
 
-    if(!localStorage.getItem('access_token') && !window.location.href.includes('login')) {
-        window.location.href = "/login"
-    }
+    useEffect(() => {
+        const accessToken = localStorage.getItem("access_token") ? localStorage.getItem("access_token") : "" ;
+        const expirationTime = jwt_decode(accessToken).exp ? jwt_decode(accessToken).exp : "" ;
+        if(!localStorage.getItem('access_token') && !window.location.href.includes('login')) {
+            window.location.href = "/login"
+        }
+        else if(expirationTime < Date.now() / 1000 && !window.location.href.includes('login')) {
+            localStorage.clear();
+            window.location.href = "/login"
+        }
+    }, [])
+
 
     return(
         <>
