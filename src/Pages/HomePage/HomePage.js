@@ -1,16 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import SideBar from "../../Components/SideBar/SideBar";
+import Fields from "../../Components/Strategies/Fields/Fields";
 
 const HomePage = () => {
 
     const [fields, setFields] = useState(null);
+    const [strategyName, setStrategyName] = useState(null);
 
     useEffect(() => {
 
     }, [fields])
 
     function handleStrategyClick(name) {
+        setStrategyName(name)
         axios.get(`/system/strategy/template?name=${name}`, {
             auth: {
                 username: "frontend@equitygenie.in",
@@ -19,9 +22,11 @@ const HomePage = () => {
         })
         .then(res => {
             setFields(res.data)
-            console.log(res.data)
         })
-        .catch(err => console.log("Error"))
+        .catch(err => {
+            setFields(null)
+            console.log(err)
+        })
     }
 
     return (
@@ -29,13 +34,7 @@ const HomePage = () => {
             <div className="row">
                 <SideBar updateName={handleStrategyClick} />
                 <div className="col-xl-8 equity-genie-stratigies">
-                    {fields !== null ? Object.entries(fields).map(([key, value], i) => {
-                        return (
-                            <div key={key}>
-                                {key} : {value}
-                            </div>
-                        )
-                    }) : <p>Choose a Strategy</p>}
+                    <Fields fields = {fields} strategyName = {strategyName} />
                 </div>
             </div>
         </div>

@@ -50,8 +50,7 @@
       "tag": "",
       "type": "number",
       "value": 2
-    }
-    //options example
+    },
     {
       "id": "options",
       "label": "Options",
@@ -70,4 +69,4 @@
   ]
 }
 
-int, float, string, bool, time, list, multiSelectList,  metaData
+  int, float, string, bool, time, list, multiSelectList,  metaData
