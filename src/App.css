@@ -112,6 +112,20 @@ a.redirect-link-tag {
   cursor: pointer !important;
 }
 
+.fields {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5%;
+}
+
+.strategy-list {
+  list-style-type: none;
+}
+
+.strategy-list-items {
+  cursor: pointer;
+}
 /* media queries */
 @media only screen and (max-width: 1200px){
   /*Tablets [601px -> 1200px]*/
