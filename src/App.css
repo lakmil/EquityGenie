@@ -126,6 +126,11 @@ a.redirect-link-tag {
 .strategy-list-items {
   cursor: pointer;
 }
+
+.hidden {
+  display: none;
+}
+
 /* media queries */
 @media only screen and (max-width: 1200px){
   /*Tablets [601px -> 1200px]*/
