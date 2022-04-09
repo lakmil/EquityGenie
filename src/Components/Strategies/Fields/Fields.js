@@ -5,7 +5,7 @@ import { IntText } from "../Element/IntText";
 import { Text } from "../Element/Text";
 import { Time } from "../Element/Time";
 
-const Fields = ({field_type, field_label, field_default}) => {
+const Fields = ({field_type, field_label, field_default, strategy_name, meta_type}) => {
     useEffect(() => {
 
     }, [field_default])
@@ -17,10 +17,10 @@ const Fields = ({field_type, field_label, field_default}) => {
             return <Text field_label={field_label} field_default = {field_default} />
         
         case 'int':
-            return <IntText field_label={field_label} field_default = {field_default} />
+            return <IntText field_label={field_label} field_default = {field_default} meta_type = {meta_type} />
 
         case 'float':
-            return <FloatText field_label={field_label} field_default = {field_default} />
+            return <FloatText field_label={field_label} field_default = {field_default} meta_type = {meta_type} />
 
         case 'time':
             return <Time field_label={field_label} field_default = {field_default} />

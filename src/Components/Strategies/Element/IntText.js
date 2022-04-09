@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const IntText = ({field_label, field_default}) => {
+export const IntText = ({field_label, field_default, meta_type}) => {
 
     const [intValue, setIntValue] = useState(null)
 
@@ -15,6 +15,20 @@ export const IntText = ({field_label, field_default}) => {
         }
     }
 
+    function handleMinMax(e) {
+        if(meta_type) {
+            console.log(e.target.value)
+            const value = e.target.value
+            const min = meta_type.min
+            const max = meta_type.max
+            if(parseInt(value) < min || isNaN(parseInt(value))) 
+                setIntValue(min);
+            else if(parseInt(value) > max)
+                setIntValue(max);
+            else return value;
+        }
+    }
+
   return (
     <div className="fields">
         <div className="label">
@@ -23,7 +37,13 @@ export const IntText = ({field_label, field_default}) => {
             </strong>
         </div>
         <div className="element">
-            <input onChange={handleChange} className="form-control" type="text" value = {intValue} />
+            <input onChange={handleChange} className="form-control" type="text" value = {intValue}
+            onKeyUp={handleMinMax} />
+            {meta_type ? 
+                <div className="desciption">
+                    <p>Min: {meta_type.min}, Max: {meta_type.max}</p>
+                </div> : null
+            }
         </div>
     </div>
   )
