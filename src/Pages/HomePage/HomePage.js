@@ -6,14 +6,12 @@ import Fields from "../../Components/Strategies/Fields/Fields";
 const HomePage = () => {
 
     const [fields, setFields] = useState(null);
-    const [strategyName, setStrategyName] = useState(null);
 
     useEffect(() => {
 
     }, [fields])
 
     function handleStrategyClick(name) {
-        setStrategyName(name)
         axios.get(`/system/strategy/template?name=${name}`, {
             auth: {
                 username: "frontend@equitygenie.in",
@@ -34,7 +32,14 @@ const HomePage = () => {
             <div className="row">
                 <SideBar updateName={handleStrategyClick} />
                 <div className="col-xl-8 equity-genie-stratigies">
-                    <Fields fields = {fields} strategyName = {strategyName} />
+                    <form>
+                    {fields ? fields.map((item, key) => {
+                        if(item.type !== "metaData")
+                            return <Fields key={key} field_type = {item.type} field_label = {item.label}
+                            field_default = {item.default} />
+                        return null
+                    }) : <p>No Fields</p>}
+                    </form>
                 </div>
             </div>
         </div>

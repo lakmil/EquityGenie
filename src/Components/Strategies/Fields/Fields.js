@@ -1,56 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { CheckBox } from "../Element/CheckBox";
+import { FloatText } from "../Element/FloatText";
+import { IntText } from "../Element/IntText";
+import { Text } from "../Element/Text";
+import { Time } from "../Element/Time";
 
-const Fields = (props) => {
-    const inputType = {
-        int: 'textbox',
-        float: 'textbox',
-        text: 'textbox',
-        bool: 'checkbox',
-        metaData: null,
-        time: 'date',
-    }
-
-    const [template, setTemplate] = useState(null);
-    const [strategyName, setStrategyName] = useState(null);
-
+const Fields = ({field_type, field_label, field_default}) => {
     useEffect(() => {
-        if(props.fields && props.strategyName) {
-            setTemplate(props.fields);
-            setStrategyName(props.strategyName)
-        }
-        else {
-            setTemplate(null);
-            setStrategyName(props.strategyName)
-        }
-    }, [props.fields, props.strategyName])
 
-    return(
-        <div className="equity-genie-dynamic-fields">
-            <h3>{strategyName}</h3>
-            <ul className="strategy-list">
-                {template ? template.map((item, key) => {
-                    if(item.type !== "metaData") {
-                        return (
-                            <li key = {key}>
-                                <div className="fields">
-                                    <div className="label">
-                                        <strong>
-                                            <label className="small mb-1">{item.label}</label>
-                                        </strong>
-                                    </div>
-                                    <div className="element">
-                                        <input className={item.type === "bool" ? "bool-checked" : "form-control"} defaultValue={item.default} type ={inputType[item.type]} name = {item.label} />
-                                    </div>
-                                </div>
-                            </li>
-                        )
-                    }
-                    else
-                        return null;
-                }) : "No Fields"}
-            </ul>
-        </div>
-    )
+    }, [field_default])
+    switch (field_type) {
+        case 'bool':
+            return <CheckBox field_label={field_label} field_default = {field_default} />
+        
+        case 'text':
+            return <Text field_label={field_label} field_default = {field_default} />
+        
+        case 'int':
+            return <IntText field_label={field_label} field_default = {field_default} />
+
+        case 'float':
+            return <FloatText field_label={field_label} field_default = {field_default} />
+
+        case 'time':
+            return <Time field_label={field_label} field_default = {field_default} />
+    
+        default:
+            return <p>{field_type}</p>;
+    }
 }
 
-export default Fields;
+export default Fields
