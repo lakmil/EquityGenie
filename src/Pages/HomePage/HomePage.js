@@ -31,17 +31,18 @@ const HomePage = () => {
 
     return (
         <div className="home-page-equity-genie container">
-            <div className="row">
+            <div className="row mt-4">
                 <SideBar updateName={handleStrategyClick} />
                 <div className="col-xl-8 equity-genie-stratigies">
                     <h3>{strategyName}</h3>
                     <form>
                     {fields ? fields.map((item, key) => {
                         if(item.type !== "metaData")
-                            return <Fields key={key} field_type = {item.type} field_label = {item.label}
-                            field_default = {item.default} meta_type = {item.metaType}  />
+                            return  <Fields field_type = {item.type} field_label = {item.label}
+                                field_default = {item.default} meta_type = {item.metaType}  />
                         return null
-                    }) : <p>No Fields</p>}
+                    }) : <p>Choose a Strategy</p>}
+                    {fields ? <input type="submit" className="btn btn-primary" name="update" value ="Update" /> : null}
                     </form>
                 </div>
             </div>
