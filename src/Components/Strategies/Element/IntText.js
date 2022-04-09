@@ -41,7 +41,7 @@ export const IntText = ({field_label, field_default, meta_type}) => {
             onKeyUp={handleMinMax} />
             {meta_type ? 
                 <div className="desciption">
-                    <p>Min: {meta_type.min}, Max: {meta_type.max}</p>
+                    <p><mute>Min: {meta_type.min}, Max: {meta_type.max}</mute></p>
                 </div> : null
             }
         </div>
