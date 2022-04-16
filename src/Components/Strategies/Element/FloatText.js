@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const FloatText = ({field_label, field_default}) => {
+export const FloatText = ({field_label, field_default, field_id}) => {
 
     const [floatValue, setFloatValue] = useState(field_default)
 
@@ -9,22 +9,20 @@ export const FloatText = ({field_label, field_default}) => {
     }, [field_default])
 
     function handleChange(e) {
-        const re = /^[0-9\b]+$/;
+        const re = /^[0-9]*(\.[0-9]{0,2})?$/;
         if (e.target.value === '' || re.test(e.target.value)) {
             setFloatValue(e.target.value)
         }
     }
 
   return (
-    <div className="fields">
-        <div className="label">
-            <strong>
-                <label className="small mb-1">{field_label}</label>
-            </strong>
-        </div>
-        <div className="element">
-            <input onChange={handleChange} className="form-control" type="text" value = {floatValue} />
-        </div>
-    </div>
+    <>
+        <td>
+            {field_label.charAt(0).toUpperCase() + field_label.slice(1)}
+        </td>
+        <td>
+            <input onChange={handleChange} className="form-control" name={field_id} type="text" value = {floatValue} />
+        </td>
+    </>
   )
 }
