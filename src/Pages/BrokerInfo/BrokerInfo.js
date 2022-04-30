@@ -85,7 +85,7 @@ const BrokerInfo = () => {
         else {
             axios.put('/user/broker-info',data)
             .then(res => {
-                console.log("Broker Info pdated")
+                console.log("Broker Info updated")
             })
             .catch(err =>  {
                 console.log("Broker Info not updated:  "+err.response.data.detail)
