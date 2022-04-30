@@ -166,6 +166,11 @@ a.redirect-link-tag {
   border: 1px solid #cfcece;
 }
 
+.sidebar-equity-genie {
+  overflow-y: scroll;
+  height: 545px;
+}
+
 /* media queries */
 @media only screen and (max-width: 1200px){
   /*Tablets [601px -> 1200px]*/

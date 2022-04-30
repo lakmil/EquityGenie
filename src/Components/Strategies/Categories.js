@@ -32,7 +32,7 @@ const Categories = (props) => {
                 {categories ? categories.map((item,index) => {
                     return (
                         <div key={index} className="list">
-                            <ListGroup.Item className="category-item">{item}</ListGroup.Item>
+                            <ListGroup.Item  className="category-item">{item}</ListGroup.Item>
                             <Strategies updateName = {props.updateName} category = {item} strategies = {strategies} />
                         </div>
                     )

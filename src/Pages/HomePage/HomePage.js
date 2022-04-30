@@ -9,26 +9,31 @@ const HomePage = () => {
 
     const [fields, setFields] = useState(null);
     const [strategyName, setStrategyName] = useState(null);
+    const [categoryName, setCategoryName] = useState(null);
     const [filteredValues, setFilteredValues] = useState(null);
-    const [post, setPost] = useState(false)
+    // const [post, setPost] = useState(false)
+    const [defaultValues, setDefaultValues] = useState(null);
+    const [getStrategy, setGetStrategy] = useState(null)
 
     useEffect(() => {
         async function getStrategyDetails() {
-            axios.get('/user/strategy/momentum')
-            .then(res => {
-                // setFields(res)
-                // localStorage.setItem("brokerData", JSON.stringify(res.data))
-            })
-            .catch(err => {
-                console.log("Broker Info not found: " + err)
-                setPost(true)
-            })
+            if(categoryName && getStrategy) {
+                axios.get(`/user/strategy/${categoryName}?name=${getStrategy}`)
+                .then(res => {
+                    setDefaultValues(res)
+                })
+                .catch(err => {
+                    console.log("Strategy not found: " + err)
+                    // setPost(true)
+                })
+            }
         } 
         getStrategyDetails()
-    }, [fields])
+    }, [fields, categoryName, getStrategy])
 
-    function handleStrategyClick(name) {
+    function handleStrategyClick(name,category) {
         setStrategyName(name)
+        setCategoryName(category.toLowerCase())
         axios.get(`/system/strategy/template?name=${name}`, {
             auth: {
                 username: "frontend@equitygenie.in",
@@ -50,8 +55,6 @@ const HomePage = () => {
 
     function handleStrategyRequest(e) {
         e.preventDefault();
-        const values = e.target.elements;
-        console.log(values)
         const filtered_values = {}
         if(!filteredValues) {
             for (const element of e.target.elements) {
@@ -61,51 +64,36 @@ const HomePage = () => {
                     if(numeric) {
                         value = Number(value)
                     }
-                    if(value === "true") 
-                        value = 1;
-                    else if(value === "false")
-                        value = 0;
                     filtered_values[element.name] = value
                 }
             }
             filtered_values['userId'] = JSON.parse(localStorage.getItem('userData')).userId
-            // filtered_values['accessLevel'] = "NORMAL"
+            filtered_values['accessLevel'] = "NORMAL"
             filtered_values['type'] = strategyName;
             setFilteredValues(filtered_values)
         }
     }
 
     function strategyNameSubmit(e) {
+        console.log("Entered");
         e.preventDefault();
         let filtered_values = filteredValues;
         filtered_values['name'] = e.target.elements.name.value;
+        setGetStrategy(e.target.elements.name.value)
         filtered_values = JSON.stringify(filteredValues);
-        if(post) {
-            axios.post('/user/strategy/momentum/', filtered_values, {
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            })
-            .then(res => {
-                console.log("Posted!")
-            })
-            .catch(err =>  {
-                console.log("Not posted:"+err)
-            })
+        const headers = {
+            'Content-type': 'application/json'
         }
-        else {
-            axios.put('/user/strategy/momentum/', filtered_values, {
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            })
-            .then(res => {
-                console.log("Posted!")
-            })
-            .catch(err =>  {
-                console.log("Not posted:"+err)
-            })
-        }
+        console.log(filtered_values)
+        axios.post(`/user/strategy/${categoryName}/`, filtered_values, {
+            headers: headers
+        })
+        .then(res => {
+            console.log("Posted!")
+        })
+        .catch(err =>  {
+            console.log("Not posted:"+err)
+        })
     }
 
     return (
@@ -120,7 +108,7 @@ const HomePage = () => {
                             {fields ? fields.map((item, key) => {
                                 if(item.type !== "metaData")
                                     return  <tr key={key}><Fields field_type = {item.type} field_label = {item.label}
-                                        field_default = {item.default} meta_type = {item.metaType} field_id = {item.id}  /></tr>
+                                        default_values = {defaultValues} field_default = {item.default} meta_type = {item.metaType} field_id = {item.id}  /></tr>
                                 return null
                             }) : <tr><td>Choose a Strategy</td></tr>}
                         </tbody>
@@ -146,7 +134,7 @@ const HomePage = () => {
                                         <input className="form-control" type = "text" name="name" placeholder="Enter Strategy Name" required />
                                     <button
                                         className="btn btn-primary mt-4"
-                                        // onClick={strategyNameSubmit}
+                                        // onClick={close}
                                     >
                                         Submit
                                     </button>
