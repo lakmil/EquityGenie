@@ -9,31 +9,17 @@ const HomePage = () => {
 
     const [fields, setFields] = useState(null);
     const [strategyName, setStrategyName] = useState(null);
-    const [categoryName, setCategoryName] = useState(null);
+    // const [categoryName, setCategoryName] = useState(null);
     const [filteredValues, setFilteredValues] = useState(null);
-    // const [post, setPost] = useState(false)
-    const [defaultValues, setDefaultValues] = useState(null);
-    const [getStrategy, setGetStrategy] = useState(null)
+    // const [defaultValues, setDefaultValues] = useState(null);
+    // const [getStrategy, setGetStrategy] = useState(null)
 
     useEffect(() => {
-        async function getStrategyDetails() {
-            if(categoryName && getStrategy) {
-                axios.get(`/user/strategy/${categoryName}?name=${getStrategy}`)
-                .then(res => {
-                    setDefaultValues(res)
-                })
-                .catch(err => {
-                    console.log("Strategy not found: " + err)
-                    // setPost(true)
-                })
-            }
-        } 
-        getStrategyDetails()
-    }, [fields, categoryName, getStrategy])
+        
+    }, [])
 
     function handleStrategyClick(name,category) {
         setStrategyName(name)
-        setCategoryName(category.toLowerCase())
         axios.get(`/system/strategy/template?name=${name}`, {
             auth: {
                 username: "frontend@equitygenie.in",
@@ -79,20 +65,28 @@ const HomePage = () => {
         e.preventDefault();
         let filtered_values = filteredValues;
         filtered_values['name'] = e.target.elements.name.value;
-        setGetStrategy(e.target.elements.name.value)
         filtered_values = JSON.stringify(filteredValues);
-        const headers = {
-            'Content-type': 'application/json'
-        }
-        console.log(filtered_values)
-        axios.post(`/user/strategy/${categoryName}/`, filtered_values, {
-            headers: headers
-        })
+        // const headers = {
+        //     'Content-type': 'application/json'
+        // }
+        // console.log(filtered_values)
+        // axios.post(`/user/strategy/${categoryName}/`, filtered_values, {
+        //     headers: headers
+        // })
+        // .then(res => {
+        //     console.log("Posted!")
+        // })
+        // .catch(err =>  {
+        //     console.log("Not posted:"+err)
+        // })
+
+        //npm json server: dbs.json
+        axios.post('http://localhost:4000/saved_strategies', filteredValues)
         .then(res => {
-            console.log("Posted!")
+            alert("Posted")
         })
-        .catch(err =>  {
-            console.log("Not posted:"+err)
+        .catch(err => {
+            alert("Not Posted : "+err)
         })
     }
 
@@ -108,12 +102,11 @@ const HomePage = () => {
                             {fields ? fields.map((item, key) => {
                                 if(item.type !== "metaData")
                                     return  <tr key={key}><Fields field_type = {item.type} field_label = {item.label}
-                                        default_values = {defaultValues} field_default = {item.default} meta_type = {item.metaType} field_id = {item.id}  /></tr>
+                                        field_default = {item.default} meta_type = {item.metaType} field_id = {item.id}  /></tr>
                                 return null
                             }) : <tr><td>Choose a Strategy</td></tr>}
                         </tbody>
                     </table>
-                    {/* {fields ? <input type="submit" className="btn btn-primary" name="update" value ="Save Changes" /> : null} */}
                         {fields ?
                             <Popup
                                 trigger={<button className="btn btn-primary"> Save Changes </button>}
