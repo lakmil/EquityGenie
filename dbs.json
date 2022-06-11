@@ -1,0 +1,88 @@
+{
+  "saved_strategies": [
+    {
+      "enabled": "false",
+      "maxTradePerDay": 3,
+      "strategyCapital": 0,
+      "filterCriteriaCeilPerc": 1.9,
+      "filterCriteriaFloorPerc": 0.4,
+      "lotSizeFactor": 0.5,
+      "rewardTimes": 1.5,
+      "userId": "MS57269",
+      "accessLevel": "NORMAL",
+      "type": "NineTwentyStrategy",
+      "name": "test 920 ",
+      "id": 1
+    },
+    {
+      "enabled": "false",
+      "maxTradePerDay": 3,
+      "strategyCapital": 0,
+      "filterCriteriaCeilPerc": 1.75,
+      "filterCriteriaFloorPerc": 0.45,
+      "lotSizeFactor": 0.5,
+      "rewardTimes": 1.5,
+      "userId": "MS57269",
+      "accessLevel": "NORMAL",
+      "type": "NineTwentyFiveStrategy",
+      "name": "test 925",
+      "id": 2
+    },
+    {
+      "enabled": "false",
+      "maxTradePerDay": 3,
+      "strategyCapital": 0,
+      "filterCriteriaCeilPerc": 1.9,
+      "filterCriteriaFloorPerc": 0.4,
+      "lotSizeFactor": 0.5,
+      "rewardTimes": 1.5,
+      "userId": "MS57269",
+      "accessLevel": "NORMAL",
+      "type": "NineTwentyStrategy",
+      "name": "test 920 1",
+      "id": 3
+    },
+    {
+      "enabled": "false",
+      "maxTradePerDay": 3,
+      "strategyCapital": 0,
+      "filterCriteriaCeilPerc": 1.9,
+      "filterCriteriaFloorPerc": 0.4,
+      "lotSizeFactor": 0.5,
+      "rewardTimes": 1.5,
+      "userId": "MS57269",
+      "accessLevel": "NORMAL",
+      "type": "NineTwentyStrategy",
+      "name": "testmytrategy",
+      "id": 4
+    },
+    {
+      "enabled": "false",
+      "maxTradePerDay": 3,
+      "strategyCapital": 0,
+      "filterCriteriaCeilPerc": 1.75,
+      "filterCriteriaFloorPerc": 0.45,
+      "lotSizeFactor": 0.5,
+      "rewardTimes": 1.5,
+      "userId": "MS57269",
+      "accessLevel": "NORMAL",
+      "type": "NineTwentyFiveStrategy",
+      "name": "hello",
+      "id": 5
+    },
+    {
+      "enabled": "false",
+      "maxTradePerDay": 3,
+      "strategyCapital": 0,
+      "filterCriteriaCeilPerc": 1.9,
+      "filterCriteriaFloorPerc": 0.45,
+      "lotSizeFactor": 0.5,
+      "rewardTimes": 1.5,
+      "userId": "MS57269",
+      "accessLevel": "NORMAL",
+      "type": "NineThirtyStrategy",
+      "name": "hello1",
+      "id": 6
+    }
+  ]
+}

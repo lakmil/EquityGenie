@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ListGroup } from "react-bootstrap";
 import Loader from "../Loader/Loader";
 import Strategies from "./Strategies";
+import UpdateSavedStrategiesProvider from '../../ContextProvider/UpdateSavedStrategiesProvider'
 
 const Categories = (props) => {
 
@@ -27,18 +28,20 @@ const Categories = (props) => {
     }, [])
 
     return(
-        <div className="equitigy-genie-categories">
-            <ListGroup>
-                {categories ? categories.map((item,index) => {
-                    return (
-                        <div key={index} className="list">
-                            <ListGroup.Item  className="category-item">{item}</ListGroup.Item>
-                            <Strategies updateName = {props.updateName} category = {item} strategies = {strategies} />
-                        </div>
-                    )
-                }) : <Loader />}      
-            </ListGroup>
-        </div>
+        <UpdateSavedStrategiesProvider>
+            <div className="equitigy-genie-categories">
+                <ListGroup>
+                    {categories ? categories.map((item,index) => {
+                        return (
+                            <div key={index} className="list">
+                                <ListGroup.Item  className="category-item">{item}</ListGroup.Item>
+                                <Strategies updateName = {props.updateName} category = {item} strategies = {strategies} />
+                            </div>
+                        )
+                    }) : <Loader />}      
+                </ListGroup>
+            </div>
+        </UpdateSavedStrategiesProvider>
     );
     
 }

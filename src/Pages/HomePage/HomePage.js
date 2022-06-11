@@ -1,22 +1,21 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SideBar from "../../Components/SideBar/SideBar";
 import Fields from "../../Components/Strategies/Fields/Fields";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import {SavedStrategyUpdate} from '../../ContextProvider/UpdateSavedStrategiesProvider';
 
 const HomePage = () => {
-
     const [fields, setFields] = useState(null);
     const [strategyName, setStrategyName] = useState(null);
     // const [categoryName, setCategoryName] = useState(null);
     const [filteredValues, setFilteredValues] = useState(null);
-    // const [defaultValues, setDefaultValues] = useState(null);
-    // const [getStrategy, setGetStrategy] = useState(null)
+    const {setUpdateSavedStrategies} = useContext(SavedStrategyUpdate)
 
     useEffect(() => {
-        
-    }, [])
+        setUpdateSavedStrategies(null);
+    }, [setUpdateSavedStrategies])
 
     function handleStrategyClick(name,category) {
         setStrategyName(name)
@@ -61,7 +60,6 @@ const HomePage = () => {
     }
 
     function strategyNameSubmit(e) {
-        console.log("Entered");
         e.preventDefault();
         let filtered_values = filteredValues;
         filtered_values['name'] = e.target.elements.name.value;
@@ -83,7 +81,8 @@ const HomePage = () => {
         //npm json server: dbs.json
         axios.post('http://localhost:4000/saved_strategies', filteredValues)
         .then(res => {
-            alert("Posted")
+            setUpdateSavedStrategies(true);
+            alert("Posted");
         })
         .catch(err => {
             alert("Not Posted : "+err)

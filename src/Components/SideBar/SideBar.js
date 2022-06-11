@@ -1,14 +1,13 @@
-import axios from "axios";
 import { useState } from "react";
 import SavedStrategies from "../SavedStrategies/SavedStrategies";
 import Categories from "../Strategies/Categories";
 
 const SideBar = (props) => {
 
+
     const [displayBody, setDisplayBody] = useState(true)
 
     useState(() => {
-    
     }, [])
 
     function handleBody() {

@@ -9,6 +9,8 @@ import Login from '../Pages/Login/Login';
 import Profile from '../Pages/Profile/Profile';
 import Register from '../Pages/Register/Register';
 import jwt_decode from "jwt-decode";
+import UpdateSavedStrategiesProvider from '../ContextProvider/UpdateSavedStrategiesProvider';
+
 
 const RouteFile = () => {
 
@@ -30,6 +32,7 @@ const RouteFile = () => {
     return(
         <>
             {localStorage.getItem('access_token') ? <NavigationBar /> : null}
+                <UpdateSavedStrategiesProvider>
             <Routes>
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/register' element={<Register />} />
@@ -37,8 +40,9 @@ const RouteFile = () => {
                 <Route exact path='/profile' element={<Profile />} />
                 <Route exact path='/broker-info' element={<BrokerInfo />} />
                 <Route exact path='/redirect/broker-info' element={<BrokerRedirect />} />
-                <Route exact path='/' element={<HomePage />} />
+                    <Route exact path='/' element={<HomePage />} />
             </Routes>
+                </UpdateSavedStrategiesProvider>
         </>
     );
 }
