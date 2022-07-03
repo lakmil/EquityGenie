@@ -6,7 +6,7 @@ import {SavedStrategyUpdate} from '../../ContextProvider/UpdateSavedStrategiesPr
 const SavedStrategies = (props) => {
 
     const [savedStrategies, setSavedStrategies] = useState(null);
-    const {updateSavedStrategies} = useContext(SavedStrategyUpdate);
+    const {updateSavedStrategies, setUpdateSavedStrategies} = useContext(SavedStrategyUpdate);
     const [flag, setFlag] = useState(null);
     // const {data, dispatch} = useContext(HomeContext)
 
@@ -22,8 +22,9 @@ const SavedStrategies = (props) => {
         } 
         getStrategyDetails()
         setFlag(updateSavedStrategies)
+        setUpdateSavedStrategies(null);
 
-    }, [flag,updateSavedStrategies])
+    }, [flag,updateSavedStrategies,setUpdateSavedStrategies])
 
     return(
         <div className="equity-genie-saved-strategies">
@@ -31,7 +32,7 @@ const SavedStrategies = (props) => {
                 {
                     savedStrategies && savedStrategies.length > 0 ? 
                     savedStrategies.map((item,index) => {
-                        return <ListGroupItem key={index}>{item.name}</ListGroupItem>
+                        return <ListGroupItem key={index} onClick = {() => props.updateName(item.type, item.name)} >{item.name}</ListGroupItem>
                     }) : <li>No Strategies</li>
                 }
             </ListGroup>

@@ -10,6 +10,7 @@ import Profile from '../Pages/Profile/Profile';
 import Register from '../Pages/Register/Register';
 import jwt_decode from "jwt-decode";
 import UpdateSavedStrategiesProvider from '../ContextProvider/UpdateSavedStrategiesProvider';
+import StrategyInputProvider from '../ContextProvider/StrategyInputProvider';
 
 
 const RouteFile = () => {
@@ -32,17 +33,19 @@ const RouteFile = () => {
     return(
         <>
             {localStorage.getItem('access_token') ? <NavigationBar /> : null}
-                <UpdateSavedStrategiesProvider>
-            <Routes>
-                <Route exact path='/login' element={<Login />} />
-                <Route exact path='/register' element={<Register />} />
-                <Route exact path='/forgot-password' element={<ForgotPassword />} />
-                <Route exact path='/profile' element={<Profile />} />
-                <Route exact path='/broker-info' element={<BrokerInfo />} />
-                <Route exact path='/redirect/broker-info' element={<BrokerRedirect />} />
-                    <Route exact path='/' element={<HomePage />} />
-            </Routes>
-                </UpdateSavedStrategiesProvider>
+                    <StrategyInputProvider>
+                        <UpdateSavedStrategiesProvider>
+                                <Routes>
+                                    <Route exact path='/login' element={<Login />} />
+                                    <Route exact path='/register' element={<Register />} />
+                                    <Route exact path='/forgot-password' element={<ForgotPassword />} />
+                                    <Route exact path='/profile' element={<Profile />} />
+                                    <Route exact path='/broker-info' element={<BrokerInfo />} />
+                                    <Route exact path='/redirect/broker-info' element={<BrokerRedirect />} />
+                                        <Route exact path='/' element={<HomePage />} />
+                                </Routes>
+                        </UpdateSavedStrategiesProvider>
+                    </StrategyInputProvider>
         </>
     );
 }

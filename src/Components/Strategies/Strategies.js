@@ -16,7 +16,7 @@ const Strategies = (props) => {
             <ListGroup>
                 {props.strategies && props.category ? props.strategies.filter(item => item.category === props.category)
                 .map((item, index) => {
-                    return <ListGroup.Item className="strategy-list-items" onClick={() => props.updateName(item.name, props.category)} key={index}>{item.name}</ListGroup.Item>
+                    return <ListGroup.Item className="strategy-list-items" onClick={() => props.updateName(item.name)} key={index}>{item.name}</ListGroup.Item>
                 }) : <Loader />
                 }
             </ListGroup>

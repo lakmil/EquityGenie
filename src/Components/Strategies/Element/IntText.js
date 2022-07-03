@@ -9,7 +9,7 @@ export const IntText = ({field_label, field_default, meta_type, field_id}) => {
         setIntValue(field_default)
         else 
         setIntValue(0)
-    }, [field_default])
+    })
 
     function handleChange(e) {
         const re = /^[0-9\b]+$/;

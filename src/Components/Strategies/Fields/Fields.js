@@ -8,8 +8,7 @@ import { Time } from "../Element/Time";
 
 const Fields = ({field_type, field_label, field_default, strategy_name, meta_type, field_id}) => {
     useEffect(() => {
-
-    }, [field_default])
+    })
     switch (field_type) {
         case 'bool':
             return <CheckBox field_label={field_label} field_default = {field_default} field_id = {field_id} />

@@ -5,19 +5,22 @@ import Fields from "../../Components/Strategies/Fields/Fields";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import {SavedStrategyUpdate} from '../../ContextProvider/UpdateSavedStrategiesProvider';
+import  {StrategyInputs}  from '../../ContextProvider/StrategyInputProvider';
 
 const HomePage = () => {
     const [fields, setFields] = useState(null);
     const [strategyName, setStrategyName] = useState(null);
-    // const [categoryName, setCategoryName] = useState(null);
+    const [savedCategoryName, setSavedCategoryName] = useState(null);
     const [filteredValues, setFilteredValues] = useState(null);
-    const {setUpdateSavedStrategies} = useContext(SavedStrategyUpdate)
+    const {setUpdateSavedStrategies} = useContext(SavedStrategyUpdate);
+    const { checkboxValue, setCheckBoxValue } = useContext(StrategyInputs);
 
     useEffect(() => {
         setUpdateSavedStrategies(null);
-    }, [setUpdateSavedStrategies])
+        setCheckBoxValue(false)
+    }, [setUpdateSavedStrategies,checkboxValue,fields,setFields])
 
-    function handleStrategyClick(name,category) {
+    function handleStrategyClick(name,category=null) {
         setStrategyName(name)
         axios.get(`/system/strategy/template?name=${name}`, {
             auth: {
@@ -26,6 +29,7 @@ const HomePage = () => {
             }
         })
         .then(res => {
+            setSavedCategoryName(category)
             setFields(res.data)
         })
         .catch(err => {
@@ -41,7 +45,7 @@ const HomePage = () => {
     function handleStrategyRequest(e) {
         e.preventDefault();
         const filtered_values = {}
-        if(!filteredValues) {
+
             for (const element of e.target.elements) {
                 if(element.name.length !== 0) {
                     const numeric = isNumeric(element.value)
@@ -55,8 +59,8 @@ const HomePage = () => {
             filtered_values['userId'] = JSON.parse(localStorage.getItem('userData')).userId
             filtered_values['accessLevel'] = "NORMAL"
             filtered_values['type'] = strategyName;
+            filtered_values['enable_status'] = checkboxValue;
             setFilteredValues(filtered_values)
-        }
     }
 
     function strategyNameSubmit(e) {
@@ -81,7 +85,7 @@ const HomePage = () => {
         //npm json server: dbs.json
         axios.post('http://localhost:4000/saved_strategies', filteredValues)
         .then(res => {
-            setUpdateSavedStrategies(true);
+            setUpdateSavedStrategies(filteredValues);
             alert("Posted");
         })
         .catch(err => {
@@ -95,6 +99,7 @@ const HomePage = () => {
                 <SideBar updateName={handleStrategyClick} />
                 <div className="col-xl-8 equity-genie-stratigies">
                     <h3>{strategyName}</h3>
+                    <h5>{savedCategoryName ? savedCategoryName : null}</h5>
                     <form id="form-strategy-fields" onSubmit={handleStrategyRequest}>
                     <table className="table table-borderless" >
                         <tbody>
@@ -137,6 +142,7 @@ const HomePage = () => {
                         </Popup>
                         : 
                         null}
+                        {savedCategoryName ? <button className="btn btn-danger">Remove Strategy</button> : null}
                     </form>
                 </div>
             </div>

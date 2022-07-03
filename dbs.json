@@ -83,6 +83,18 @@
       "type": "NineThirtyStrategy",
       "name": "hello1",
       "id": 6
+    },
+    {
+      "enabled": "false",
+      "maxTradePerDay": 3,
+      "strategyCapital": 0,
+      "filterCriteriaCeilPerc": 1.9,
+      "lotSizeFactor": 0.5,
+      "userId": "MS57269",
+      "accessLevel": "NORMAL",
+      "type": "UltaPultaStrategy1",
+      "name": "admintester",
+      "id": 7
     }
   ]
 }

@@ -19,7 +19,7 @@ const SideBar = (props) => {
             <div className="card mb-4 mb-xl-0">
                 <div className="card-header">Saved Strategies</div>
                 <div className="card-body text-center">
-                    <SavedStrategies />
+                    <SavedStrategies updateName = {props.updateName} />
                 </div>
                 <div className="card-header" onClick={handleBody}>Categories</div>
                 {displayBody ? 
